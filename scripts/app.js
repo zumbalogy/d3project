@@ -1,6 +1,5 @@
 console.log('hello');
 
-$("#p").text('dsf');
 
 
-console.log($("p"))
+console.log(raw_log);
