@@ -24,6 +24,8 @@ function newPiePerson(){
     ]
 };
 
+
+
 var pie = d3.layout.pie();
 var color = d3.scale.category10();
 
@@ -54,7 +56,6 @@ function pieFill(){
 
     arcs.empty();
     arcs.append("path")
-        //.transition()
         .attr("fill", function(d, i) {
             return color(i)
         })
@@ -77,7 +78,3 @@ window.setInterval(function(){
     }, 
     1000
 )
-
-
-
-
