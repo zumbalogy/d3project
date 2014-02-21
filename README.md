@@ -34,8 +34,8 @@ git log \
  
 var gitLog, lstat;
  
-gitLog = require('git-log.json');
-lstat = require('git-stat.json');
+gitLog = require('./data/git-log.json');
+lstat = require('./data/git-stat.json');
  
 gitLog.map(function(o){
     o.stat = lstat[o.commit];
