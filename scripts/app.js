@@ -30,14 +30,7 @@ for (var key in alist){
     td8.text(alist[key].other_count);
 
 
-    $(tr).append(td1);
-    $(tr).append(td2);
-    $(tr).append(td3);
-    $(tr).append(td4);
-    $(tr).append(td5);
-    $(tr).append(td6);
-    $(tr).append(td7);
-    $(tr).append(td8);
+    $(tr).append(td1,td2, td3, td4, td5, td6, td7, td8);
 
     $('#table').append(tr)
     console.log(alist[key]);
