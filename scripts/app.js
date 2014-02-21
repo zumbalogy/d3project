@@ -1,3 +1,4 @@
+var alist = by_name
 
 for (var key in alist){
     var tr = $(document.createElement('tr'));
@@ -22,8 +23,6 @@ for (var key in alist){
 }
 
 
-var fs = require('fs');
-fs.writeFile('../data/name_list.js', JSON.stringify(alist))
 
  // todo, new parsed big object could just be put in a file directly already parsed
  // (then maybe in mongo)
