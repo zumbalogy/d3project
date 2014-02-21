@@ -69,17 +69,16 @@ function newPiePerson(){
         });
 
 
-    // }, 3000)
-window.setInterval(function(){
-    svg.selectAll("g.arc").clear;
-    svg.selectAll("g.arc")
-            .data(pie(newPiePerson()))
-            .enter()
-            .append("g")
-            .attr("class", "arc")
-            .attr("transform", "translate(" + outerRadius + ", " + outerRadius + ")")
-    }, 1000
-)
+// window.setInterval(function(){
+//     console.log(pie)
+//     svg.selectAll("g.arc")
+//             .data(pie(newPiePerson()))
+//             .enter()
+//             .append("g")
+//             .attr("class", "arc")
+//             .attr("transform", "translate(" + outerRadius + ", " + outerRadius + ")")
+//     }, 1000
+// )
 
 
 
