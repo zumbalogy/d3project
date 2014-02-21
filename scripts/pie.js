@@ -21,13 +21,13 @@ console.log(pieData);
 
 var pie = d3.layout.pie();
 
-var w = 300;
-var h = 300;
+var w = 600;
+var h = 600;
 
 var color = d3.scale.category10();
 
 var outerRadius = w / 2;
-var innerRadius = 0;
+var innerRadius = 150;
 var arc = d3.svg.arc()
                 .innerRadius(innerRadius)
                 .outerRadius(outerRadius);
