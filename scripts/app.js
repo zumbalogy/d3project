@@ -1,9 +1,4 @@
-console.log('hello');
-console.log(raw_log);
-console.log(raw_log[0]);
-
 var alist = {};
-
 
 function get_file_type(input){
     var split = input.split('.');
@@ -52,12 +47,27 @@ for (var i = 0; i < raw_log.length; i++){
 
 
 for (var key in alist){
+    var tr = $(document.createElement('tr'));
+    var td1 = $(document.createElement('td'));
+    var td2 = $(document.createElement('td'));
+    var td3 = $(document.createElement('td'));
+    var td4 = $(document.createElement('td'));
+
+    td1.text(alist[key].name);
+    td2.text(alist[key].commit_count);
+    td3.text(alist[key].ruby_count);
+    td4.text(alist[key].js_count);
+
+
+    $(tr).append(td1);
+    $(tr).append(td2);
+    $(tr).append(td3);
+    $(tr).append(td4);
+
+    $('#table').append(tr)
     console.log(alist[key]);
 }
 
- console.log(alist);
 
-
-
- // todo, add name inside the object as well maybe
- // // split on '<' and take the zeroth prolly
+ // todo, new parsed big object could just be put in a file directly already parsed
+ // (then maybe in mongo)
