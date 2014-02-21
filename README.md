@@ -49,7 +49,7 @@ var alist = {};
 
 function get_file_type(input){
     var split = input.split('.');
-    return split[split.length - 1]
+    return split.pop();
 }
 
 for (var i = 0; i < raw_log.length; i++){
