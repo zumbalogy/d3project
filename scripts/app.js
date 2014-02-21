@@ -4,8 +4,8 @@ console.log(raw_log[0]);
 
 var alist = {};
 
+
 function get_file_type(input){
-    // input.split('.').last would be ruby code
     var split = input.split('.');
     return split[split.length - 1]
 }
@@ -16,7 +16,6 @@ for (var i = 0; i < raw_log.length; i++){
         alist[raw_log[i].author].commit_count ++;
 
         for (var n = 0; n < stat.length; n++){
-            // switch (stat[n].path) {
             switch (get_file_type(stat[n].path)) {
                 case 'rb':
                     alist[raw_log[i].author].ruby_count ++;
@@ -37,8 +36,6 @@ for (var i = 0; i < raw_log.length; i++){
                     alist[raw_log[i].author].other_count ++;
             }
         }
-
-
     } else {
         alist[raw_log[i].author] = {
             commit_count:  1,
@@ -50,6 +47,16 @@ for (var i = 0; i < raw_log.length; i++){
             other_count: 0
         };
     }
+};
+
+
+for (var key in alist){
+    console.log(alist[key]);
 }
 
-console.log(alist)
+ console.log(alist);
+
+
+
+ // todo, add name inside the object as well maybe
+ // // split on '<' and take the zeroth prolly
