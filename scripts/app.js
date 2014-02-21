@@ -38,6 +38,7 @@ for (var i = 0; i < raw_log.length; i++){
         }
     } else {
         alist[raw_log[i].author] = {
+            name: (raw_log[i].author).split(' <')[0],
             commit_count:  1,
             ruby_count: 0,
             js_count: 0,
