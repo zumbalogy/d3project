@@ -1,22 +1,30 @@
 var pieData = by_name;
 
-var rubyFiles = 0;
-var jsFiles = 0;
-var htmlFiles = 0;
-var erbFiles = 0;
-var cssFiles = 0;
-var otherFiles = 0;
+var rubyFiles, jsFiles, htmlFiles, erbFiles, cssFiles, otherFiles, name;
 
+var key_array = [];
 for (var key in pieData){
-    rubyFiles += pieData[key].ruby_count;
-    jsFiles += pieData[key].js_count;
-    htmlFiles += pieData[key].html_count;
-    erbFiles += pieData[key].erb_count;
-    cssFiles += pieData[key].css_count;
-    otherFiles += pieData[key].other_count;
+    if (key !== "Lior Elrom <liormb@users.noreply.github.com>" || key !== "dlopezh <daniellopezh@gmail.com>"){
+        key_array.push(key)
+    }
+}
+
+
+
+var onePieData;
+function newPiePerson(){
+    var key = key_array[Math.floor(Math.random()*key_array.length)];
+    name = pieData[key].name;
+    rubyFiles = pieData[key].ruby_count;
+    jsFiles = pieData[key].js_count;
+    htmlFiles = pieData[key].html_count;
+    erbFiles = pieData[key].erb_count;
+    cssFiles = pieData[key].css_count;
+    otherFiles = pieData[key].other_count;
+    return onePieData = [rubyFiles, jsFiles, htmlFiles, erbFiles, cssFiles, otherFiles];
 };
 
-var pieData = [rubyFiles, jsFiles, htmlFiles, erbFiles, cssFiles, otherFiles];
+
 console.log(pieData);
 
 var pie = d3.layout.pie();
@@ -38,7 +46,7 @@ var svg = d3.select("#pie-chart")
             .attr("height", h);
 
 var arcs = svg.selectAll("g.arc")
-        .data(pie(pieData))
+        .data(pie(newPiePerson()))
         .enter()
         .append("g")
         .attr("class", "arc")
@@ -58,3 +66,10 @@ arcs.append("path")
     .text(function(d) {
         return d.value;
     });
+
+var arcs = svg.selectAll("g.arc")
+        .data(pie(pieData))
+        .enter()
+        .append("g")
+        .attr("class", "arc")
+        .attr("transform", "translate(" + outerRadius + ", " + outerRadius + ")");
