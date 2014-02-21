@@ -1,4 +1,10 @@
-var alist = by_name
+var alist = by_name;
+
+var pieData = by_name;
+
+for (var key in pieData){
+    console.log(pieData[key].name);
+}
 
 // name: (raw_log[i].author).split(' <')[0],
 //     commit_count:  1,
@@ -33,7 +39,6 @@ for (var key in alist){
     $(tr).append(td1,td2, td3, td4, td5, td6, td7, td8);
 
     $('#table').append(tr)
-    console.log(alist[key]);
 }
 
 
