@@ -1,14 +1,5 @@
 var alist = by_name
 
-// name: (raw_log[i].author).split(' <')[0],
-//     commit_count:  1,
-//     ruby_count: 0,
-//     js_count: 0,
-//     erb_count: 0,
-//     html_count: 0,
-//     css_count: 0,
-//     other_count: 0
-
 for (var key in alist){
     var tr = $(document.createElement('tr'));
     var td1 = $(document.createElement('td'));
@@ -36,50 +27,17 @@ for (var key in alist){
 }
 
 
-
- // todo, new parsed big object could just be put in a file directly already parsed
- // (then maybe in mongo)
-
 function get_file_type(input){
     var split = input.split('.');
     return split.pop();
 }
 
-// for (var i = 0; i < raw_log.length; i++){
-//     if (alist[raw_log[i].author]) {
-//         var stat = raw_log[i].stat
-//         alist[raw_log[i].author].commit_count ++;
-
-//         for (var n = 0; n < stat.length; n++){
-//             switch (get_file_type(stat[n].path)) {
-//                 case 'rb':
-//                     alist[raw_log[i].author].ruby_count ++;
-//                     break;
-//                 case 'js':
-//                     alist[raw_log[i].author].js_count ++;
-//                     break;
-//                 case 'erb':
-//                     alist[raw_log[i].author].erb_count ++;
-//                     break;
-//                 case 'html':
-//                     alist[raw_log[i].author].html_count ++;
-//                     break;
-//                 case 'css':
-//                     alist[raw_log[i].author].css_count ++;
-//                     break;
-//                 default:
-//                     alist[raw_log[i].author].other_count ++;
-//             }
-//         }
-
 var hash = {};
 for (var i = 0; i < raw_log.length; i++){
-    // var time = raw_log[i].date.split(' ')[1] + raw_log[i].date.split(' ')[2]
-    // array.push(time)
     var a = new Date(raw_log[i].date);
     var b =  "" + a.getFullYear() + '-' + a.getMonth() + '-' + a.getDate();
     if (hash[b]) {
-        hash[b] = {commits: (hash[b].commits + 1)}
+        hash[b].commits = hash[b].commits + 1;
         var stat = raw_log[i].stat
         for (var n = 0; n < stat.length; n++){
             switch (get_file_type(stat[n].path)) {
