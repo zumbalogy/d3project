@@ -16,6 +16,14 @@ for (var key in pieData){
     otherFiles += pieData[key].other_count;
 };
 
+
+
+/// Function to fetch random person git data
+
+var fetchPersonData = function(){
+
+}
+
 var pieData = [rubyFiles, jsFiles, htmlFiles, erbFiles, cssFiles, otherFiles];
 console.log(pieData);
 
