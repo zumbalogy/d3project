@@ -6,15 +6,6 @@ for (var key in pieData){
     console.log(pieData[key].name);
 }
 
-// name: (raw_log[i].author).split(' <')[0],
-//     commit_count:  1,
-//     ruby_count: 0,
-//     js_count: 0,
-//     erb_count: 0,
-//     html_count: 0,
-//     css_count: 0,
-//     other_count: 0
-
 for (var key in alist){
     var tr = $(document.createElement('tr'));
     var td1 = $(document.createElement('td'));
@@ -39,9 +30,71 @@ for (var key in alist){
     $(tr).append(td1,td2, td3, td4, td5, td6, td7, td8);
 
     $('#table').append(tr)
+
+}
+
+
+function get_file_type(input){
+    var split = input.split('.');
+    return split.pop();
+}
+
+var hash = {};
+for (var i = 0; i < raw_log.length; i++){
+    var a = new Date(raw_log[i].date);
+    var b =  "" + a.getFullYear() + '-' + a.getMonth() + '-' + a.getDate();
+    if (hash[b]) {
+        hash[b].commits = hash[b].commits + 1;
+        var stat = raw_log[i].stat
+        for (var n = 0; n < stat.length; n++){
+            switch (get_file_type(stat[n].path)) {
+                case 'rb':
+                    hash[b].ruby ++;
+                    break;
+                case 'js':
+                    hash[b].js ++;
+                    break;
+                case 'erb':
+                    hash[b].erb ++;
+                    break;
+                case 'html':
+                    hash[b].html ++;
+                    break;
+                case 'css':
+                    hash[b].css ++;
+                    break;
+                default:
+                    hash[b].other ++;
+            }
+        }   
+    } else {
+        hash[b] = {commits: 1,
+            ruby: 0,
+            js: 0,
+            erb: 0,
+            css: 0,
+            html: 0,
+            other: 0
+        }
+    }
+}
+
+
+console.log(hash)
+
+
+
+function GetUnique(inputArray) {
+    var outputArray = [];
+    for (var i = 0; i < inputArray.length; i++)
+    {
+        if ((jQuery.inArray(inputArray[i], outputArray)) == -1)
+        {
+            outputArray.push(inputArray[i]);
+        }
+    }
+    return outputArray;
 }
 
 
 
- // todo, new parsed big object could just be put in a file directly already parsed
- // (then maybe in mongo)
