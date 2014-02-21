@@ -1,11 +1,5 @@
 var alist = by_name;
 
-var pieData = by_name;
-
-for (var key in pieData){
-    console.log(pieData[key].name);
-}
-
 for (var key in alist){
     var tr = $(document.createElement('tr'));
     var td1 = $(document.createElement('td'));
