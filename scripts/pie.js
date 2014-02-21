@@ -45,9 +45,10 @@ var svg = d3.select("#pie-chart")
             .attr("height", h);
 
 function pieFill(){
-    
+    $('#name-tag').text(name)
     $('svg').empty()
     var arcs = svg.selectAll("g.arc").data(pie(newPiePerson()))
+    console.log(arcs)
 
     arcs.enter()
         .append("g")
@@ -69,12 +70,11 @@ function pieFill(){
         .text(function(d) {
             return d.value;
         })
-    
 }
 
 pieFill()
-window.setInterval(function(){
-        pieFill()
-    }, 
-    1000
-)
+// window.setInterval(function(){
+//         pieFill()
+//     }, 
+//     1000
+// )
