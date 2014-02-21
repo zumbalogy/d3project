@@ -1,6 +1,6 @@
 var pieData = by_name;
 
-var rubyFiles, jsFiles, htmlFiles, erbFiles, cssFiles, otherFiles, name;
+var name;
 
 var key_array = [];
 for (var key in pieData){
@@ -9,17 +9,17 @@ for (var key in pieData){
     }
 }
 
-var onePieData;
+
 function newPiePerson(){
     var key = key_array[Math.floor(Math.random()*key_array.length)];
     name = pieData[key].name;
-    rubyFiles = pieData[key].ruby_count;
-    jsFiles = pieData[key].js_count;
-    htmlFiles = pieData[key].html_count;
-    erbFiles = pieData[key].erb_count;
-    cssFiles = pieData[key].css_count;
-    otherFiles = pieData[key].other_count;
-    return onePieData = [rubyFiles, jsFiles, htmlFiles, erbFiles, cssFiles, otherFiles];
+    var rubyFiles = pieData[key].ruby_count;
+    var jsFiles = pieData[key].js_count;
+    var htmlFiles = pieData[key].html_count;
+    var erbFiles = pieData[key].erb_count;
+    var cssFiles = pieData[key].css_count;
+    var otherFiles = pieData[key].other_count;
+    return [rubyFiles, jsFiles, htmlFiles, erbFiles, cssFiles, otherFiles];
 };
 
 // window.setInterval(function(){
@@ -27,14 +27,14 @@ function newPiePerson(){
     console.log(name)
 
     var pie = d3.layout.pie();
+    var color = d3.scale.category10();
 
     var w = 600;
     var h = 600;
 
-    var color = d3.scale.category10();
-
     var outerRadius = w / 2;
     var innerRadius = 150;
+
     var arc = d3.svg.arc()
                     .innerRadius(innerRadius)
                     .outerRadius(outerRadius);
@@ -51,13 +51,11 @@ function newPiePerson(){
             .attr("class", "arc")
             .attr("transform", "translate(" + outerRadius + ", " + outerRadius + ")")
 
-
     arcs.append("path")
         .attr("fill", function(d, i) {
             return color(i)
         })
         .attr("d", arc)
-
 
         arcs.append("text")
         .attr("transform", function(d) {
@@ -69,16 +67,16 @@ function newPiePerson(){
         });
 
 
-// window.setInterval(function(){
-//     console.log(pie)
-//     svg.selectAll("g.arc")
-//             .data(pie(newPiePerson()))
-//             .enter()
-//             .append("g")
-//             .attr("class", "arc")
-//             .attr("transform", "translate(" + outerRadius + ", " + outerRadius + ")")
-//     }, 1000
-// )
+window.setInterval(function(){
+    console.log(arc)
+    svg.selectAll("g.arc")
+            .data(pie(newPiePerson()))
+            .enter()
+            .append("g")
+            .attr("class", "arc")
+            .attr("transform", "translate(" + outerRadius + ", " + outerRadius + ")")
+    }, 1000
+)
 
 
 
