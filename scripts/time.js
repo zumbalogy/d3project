@@ -76,3 +76,16 @@ window.setInterval(function(){
     }, 
     2000
 )
+
+var byDate = by_date;
+
+
+var table = document.createElement('table');
+
+for (var i = 0; i < byDate.length; i++){    
+    console.log(byDate[i]);
+    console.log('dfsd');
+}
+
+
+$('body').append(table);
