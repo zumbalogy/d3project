@@ -71,21 +71,46 @@ function pieFill(){
     
 }
 pieFill();
-window.setInterval(function(){
-        pieFill()
-    }, 
-    2000
-)
+// window.setInterval(function(){
+//         pieFill()
+//     }, 
+//     2000
+// )
 
 var byDate = by_date;
 
 
 var table = document.createElement('table');
+$(table).attr('border', '1px')
 
-for (var i = 0; i < byDate.length; i++){    
-    console.log(byDate[i]);
-    console.log('dfsd');
-}
+for (var key in byDate){  
+    var tr = document.createElement('tr');  
+    var td1 = document.createElement('td');
+    var td2 = document.createElement('td'); 
+    var td3 = document.createElement('td');
+    var td4 = document.createElement('td'); 
+    var td5 = document.createElement('td'); 
+    var td6 = document.createElement('td'); 
+    var td7 = document.createElement('td'); 
+    var td8 = document.createElement('td'); 
+    $(td1).text(key);
+    $(td2).text(byDate[key].commits);
+    $(td3).text(byDate[key].rb);
+    $(td4).text(byDate[key].js);
+    $(td5).text(byDate[key].erb);
+    $(td6).text(byDate[key].css);
+    $(td7).text(byDate[key].html);
+    $(td8).text(byDate[key].other);
+    $(tr).append(td1)
+    $(tr).append(td2)
+    $(tr).append(td3)
+    $(tr).append(td4)
+    $(tr).append(td5)
+    $(tr).append(td6)
+    $(tr).append(td7)
+    $(tr).append(td8)
 
+    $(table).append(tr)
+};
 
 $('body').append(table);
