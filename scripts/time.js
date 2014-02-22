@@ -95,20 +95,14 @@ for (var key in byDate){
     var td8 = document.createElement('td'); 
     $(td1).text(key);
     $(td2).text(byDate[key].commits);
-    $(td3).text(byDate[key].rb);
+    // $(td2).attr('stlye', "background-color: rgba(" + byDate[key].commits + ", 0, 0, 1);");
+    $(td3).text(byDate[key].ruby);
     $(td4).text(byDate[key].js);
     $(td5).text(byDate[key].erb);
     $(td6).text(byDate[key].css);
     $(td7).text(byDate[key].html);
     $(td8).text(byDate[key].other);
-    $(tr).append(td1)
-    $(tr).append(td2)
-    $(tr).append(td3)
-    $(tr).append(td4)
-    $(tr).append(td5)
-    $(tr).append(td6)
-    $(tr).append(td7)
-    $(tr).append(td8)
+    $(tr).append(td1, td2, td3, td4, td5, td6, td7, td8);
 
     $(table).append(tr)
 };
