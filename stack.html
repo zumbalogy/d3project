@@ -28,33 +28,41 @@
             .attr("height", h )
             .append("svg:g")
             .attr("transform", "translate(10,470)");
- 
+            
+            var colors = ["black", "red", "blue", 'yellow', 'green', 'teal', '#8C564B']
             x = d3.scale.ordinal().rangeRoundBands([0, w-50])
             y = d3.scale.linear().range([0, h-50])
-            z = d3.scale.ordinal().range(["darkblue", "blue", "lightblue"])
+            z = d3.scale.ordinal().range(colors)
  
-            console.log("RAW MATRIX---------------------------");
-        // 4 columns: ID,c1,c2,c3
-            var matrix = [
-            ];
+            var matrix = [];
 
             var byDate = by_date;
-            var count = 6;
+            var count = 1;
+
             for (var key in byDate){
-                matrix.push([count, byDate[key].commits, byDate[key].ruby, byDate[key].js ])
+                matrix.push([
+                    count, 
+                    byDate[key].commits, 
+                    byDate[key].ruby, 
+                    byDate[key].js, 
+                    byDate[key].erb, 
+                    byDate[key].html, 
+                    byDate[key].css, 
+                    byDate[key].other 
+                ])
                 count ++
             }
- 
-            console.log("REMAP---------------------------");
-            var remapped =["c1","c2","c3"].map(function(dat,i){
+            matrix = matrix.reverse();
+            
+            console.log(count);
+            var remapped =["c1","c2","c3", "c4", "c5", "c6", "c7" ].map(function(dat,i){
                 return matrix.map(function(d,ii){
                     return {x: ii, y: d[i+1] };
                 })
             });
             console.log(remapped)
  
-            console.log("LAYOUT---------------------------");
-            var stacked = d3.layout.stack()(remapped)
+            var stacked = d3.layout.stack().offset('wiggle')(remapped) //silhouette
             console.log(stacked)
  
             x.domain(stacked[0].map(function(d) { return d.x; }));
