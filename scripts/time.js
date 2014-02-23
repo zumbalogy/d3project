@@ -4,12 +4,13 @@ var name;
 var key_array = [];
 for (var key in pieData){
     if (key == "Lior Elrom <liormb@users.noreply.github.com>" || key == "dlopezh <daniellopezh@gmail.com>"){
-        console.log(key)
+        console.log(key + ' deleted')
     }
     else {
         key_array.push(key)
     }
 }
+
 
 function newPiePerson(){
     var key = key_array[Math.floor(Math.random()*key_array.length)];
@@ -26,6 +27,7 @@ function newPiePerson(){
 
 var pie = d3.layout.pie();
 var color = d3.scale.category10();
+var colors = ['red','white','blue','black','green','pink','purple']
 
 var w = 800;
 var h = 800;
@@ -56,7 +58,8 @@ function pieFill(){
     arcs.append("path")
         //.transition()
         .attr("fill", function(d, i) {
-            return color(i)
+            //return color(i)
+            return colors[i]
         })
         .attr("d", arc)
 
@@ -78,7 +81,7 @@ pieFill();
 // )
 
 var byDate = by_date;
-
+// 73 days long
 
 var table = document.createElement('table');
 $(table).attr('border', '1px')
@@ -111,14 +114,17 @@ $('body').append(table);
 
 ////////////////////////////////////////////////////////////
 
-var n = 20, // number of layers
-    m = 200, // number of samples per layer
-    stack = d3.layout.stack().offset("wiggle"),
+var n = 7, // number of layers
+    m = 73, // number of samples per layer
+    stack = d3.layout.stack().offset("wiggle"),  // 'zero' for flat base
+                                                    // 'wiggle' for example like one
+                                                    // 'expand' for percentage
+                                                    // 'silhouette' for centered
     layers0 = stack(d3.range(n).map(function() { return bumpLayer(m); })),
     layers1 = stack(d3.range(n).map(function() { return bumpLayer(m); }));
 
-var width = 960,
-    height = 500;
+var width = 1350,
+    height = 600;
 
 var x = d3.scale.linear()
     .domain([0, m - 1])
@@ -128,9 +134,11 @@ var y = d3.scale.linear()
     .domain([0, d3.max(layers0.concat(layers1), function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); })])
     .range([height, 0]);
 
-var color = d3.scale.linear()
-    .domain([0, 1, 2, 3])
-    .range(["white", "black", 'red', 'blue']);
+// var color = d3.scale.linear()
+//     .domain([0, 1, 2, 3])
+//     .range(["white", "black", 'red', 'blue']);
+
+var color_array = ['#D62728','#1F77B4','#FF7F0E','#9467BD', '#2CA02C','#8C564B','white']
 
 var area = d3.svg.area()
     .x(function(d) { return x(d.x); })
@@ -145,7 +153,7 @@ svg.selectAll("path")
     .data(layers0)
   .enter().append("path")
     .attr("d", area)
-    .style("fill", function() { return color(Math.random() * 3); });
+    .style("fill", function() { return color_array.pop() })//color(Math.random() * 3); });
 
 function transition() {
   d3.selectAll("path")
@@ -177,3 +185,9 @@ function bumpLayer(n) {
   for (i = 0; i < 5; ++i) bump(a);
   return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
 }
+
+// var n = 7, // number of layers
+//     m = 73, // number of samples per layer
+//     stack = d3.layout.stack().offset("silhouette"), 
+//     layers0 = stack(d3.range(n).map(function() { return bumpLayer(m); })),
+//     layers1 = stack(d3.range(n).map(function() { return bumpLayer(m); }));
